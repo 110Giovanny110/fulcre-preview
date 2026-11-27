@@ -731,10 +731,11 @@ html:has(dialog.wam[open]){overflow:hidden}
 /* Dor: so o icone vermelho e o problema */
 .ledger .fix{display:none!important}
 .ledger>li{grid-template-columns:auto minmax(0,1fr)!important}
-/* Divisoria entre blocos: linha dourada fina no topo de cada dobra e fundo alternado mais calmo */
-main>section.sec{position:relative}
-main>section.sec+section.sec::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(1000px,86%);height:1px;background:linear-gradient(90deg,transparent,rgba(217,180,122,.55),transparent);pointer-events:none}
-main>section.sec:nth-of-type(even){background:linear-gradient(180deg,rgba(6,10,20,.72),rgba(6,10,20,.72))}
+/* Divisoria entre blocos (v2): faixas alternadas de ponta a ponta, com borda nitida em cima e embaixo.
+   Uma dobra sim, outra nao, ganha fundo solido; o fundo animado so aparece nas dobras sem faixa. */
+main>section.sec{position:relative;isolation:isolate;content-visibility:visible!important}
+main>section.sec:nth-of-type(odd)::after{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:linear-gradient(180deg,#0C1426,#091020);border-top:1px solid rgba(217,180,122,.28);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 -30px 60px -40px rgba(217,180,122,.25)}
+main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 /* Computador: topo com mais espaco */
 @media(min-width:761px){
   .hero .kick{margin-bottom:clamp(40px,6svh,64px);transform:translateY(-18px)}
