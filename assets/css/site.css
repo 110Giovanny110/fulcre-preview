@@ -731,11 +731,15 @@ html:has(dialog.wam[open]){overflow:hidden}
 /* Dor: so o icone vermelho e o problema */
 .ledger .fix{display:none!important}
 .ledger>li{grid-template-columns:auto minmax(0,1fr)!important}
-/* Divisoria entre blocos (v2): faixas alternadas de ponta a ponta, com borda nitida em cima e embaixo.
-   Uma dobra sim, outra nao, ganha fundo solido; o fundo animado so aparece nas dobras sem faixa. */
+/* Divisoria entre blocos (v3): fio que nasce transparente nas pontas, dourado no meio,
+   com um ponto de luz no centro e um brilho que percorre o fio de tempos em tempos. Nao corta a pagina. */
 main>section.sec{position:relative;content-visibility:visible!important}
-main>section.sec:nth-of-type(odd){isolation:isolate}
-main>section.sec:nth-of-type(odd)::after{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:none;border-top:1px solid rgba(217,180,122,.28);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 -30px 60px -40px rgba(217,180,122,.25)}
+main>section.sec+section.sec::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(980px,88%);height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,240,210,.95),transparent) no-repeat -50% 0/28% 100%,linear-gradient(90deg,transparent,rgba(217,180,122,.14) 22%,rgba(217,180,122,.55) 50%,rgba(217,180,122,.14) 78%,transparent);
+  animation:fioLuz 7s cubic-bezier(.45,0,.25,1) infinite}
+main>section.sec+section.sec::after{content:'';position:absolute;top:-3px;left:50%;width:7px;height:7px;margin-left:-3.5px;transform:rotate(45deg);pointer-events:none;background:#F2D7A6;box-shadow:0 0 0 3px rgba(217,180,122,.12),0 0 14px 3px rgba(217,180,122,.45);animation:fioNo 7s ease-in-out infinite}
+@keyframes fioLuz{0%,18%{background-position:-50% 0,0 0}72%,100%{background-position:150% 0,0 0}}
+@keyframes fioNo{0%,100%{opacity:.75;box-shadow:0 0 0 3px rgba(217,180,122,.1),0 0 10px 2px rgba(217,180,122,.35)}45%{opacity:1;box-shadow:0 0 0 4px rgba(217,180,122,.16),0 0 20px 5px rgba(217,180,122,.6)}}
 main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 /* Computador: topo com mais espaco */
 @media(min-width:761px){
@@ -753,3 +757,21 @@ main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 .oferta>.lbl::before{width:9px;height:9px}
 .oferta>h3{font-family:'Figtree',sans-serif;font-size:clamp(15.5px,.3vw + 14px,17.5px);font-weight:500;letter-spacing:0;color:var(--soft);margin-top:12px}
 .oferta>h3 span{display:inline}
+/* 27/11 parte 3 (pedido do dono) */
+/* Dia a dia: bolinha mais rapida */
+.dia-box{--dur:10s}
+.dia>li:nth-child(2) .hora::before{animation-delay:2s}.dia>li:nth-child(3) .hora::before{animation-delay:4s}.dia>li:nth-child(4) .hora::before{animation-delay:6s}.dia>li:nth-child(5) .hora::before{animation-delay:8s}
+@media(max-width:720px){
+  .dia-box{--dur:5s}
+  .dia>li:nth-child(2) .hora::before{animation-delay:1s}.dia>li:nth-child(3) .hora::before{animation-delay:2s}.dia>li:nth-child(4) .hora::before{animation-delay:3s}.dia>li:nth-child(5) .hora::before{animation-delay:4s}
+}
+/* Calculadora fechada: so titulo, frase e botao; abre ao clicar */
+.calc-gate{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:clamp(8px,1.5vw,16px)}
+.calc-gate .note{margin:0;color:var(--soft);font-size:14.5px}
+.calc-open{gap:10px}
+.calc-open svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.calc-sec:not(.gated) .calc-gate{display:none}
+.calc-sec.gated:not(.is-open) .calc{display:none}
+.calc-sec.is-open .calc-gate{display:none}
+.calc-sec.is-open .calc{animation:calcIn .6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes calcIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}

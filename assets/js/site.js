@@ -273,3 +273,19 @@
     setTimeout(function () { ready = true; if (!near) fab.classList.add('show'); }, 40000);
   }
 })();
+
+// Calculadora: fica fechada atras de um botao e abre no clique.
+(function () {
+  var sec = document.querySelector('[data-calc]');
+  var btn = sec && sec.querySelector('[data-calc-open]');
+  if (!btn) return;
+  sec.classList.add('gated');
+  btn.addEventListener('click', function () {
+    sec.classList.add('is-open');
+    btn.setAttribute('aria-expanded', 'true');
+    var first = sec.querySelector('.calc .seg button');
+    if (first) first.focus({ preventScroll: true });
+    var box = sec.querySelector('.calc');
+    if (box && box.scrollIntoView) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+})();

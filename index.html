@@ -25,7 +25,7 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="preload" href="./assets/fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="./assets/fonts/figtree.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="./assets/css/site.css?v=8">
+<link rel="stylesheet" href="./assets/css/site.css?v=9">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Fulcre","url":"https://fulcre.com.br/","logo":"https://fulcre.com.br/assets/img/fulcre-icone-512.png","email":"contato@fulcre.com.br","taxID":"69.603.600/0001-40"}</script>
 </head>
 <body>
@@ -230,7 +230,11 @@
 <!-- Dobra 9 · Faça a conta (T5, âncora #faca-a-conta): preços em assets/data/precos.json, lógica em assets/js/calc.js -->
 <section class="sec sec-flow wrap calc-sec" id="faca-a-conta" data-calc data-state="idle" aria-labelledby="t-calc" style="--h:1349px;--hd:1040px">
   <div class="sec-head"><h2 class="rv grad" id="t-calc">Faça a conta antes de assinar mais uma mensalidade.</h2><p class="rv">Produto ou serviço, veja o preço da Fulcre ao lado do que o mercado costuma cobrar.</p></div>
-  <div class="glow calc rv" data-tipo="prod">
+  <div class="calc-gate rv">
+    <button type="button" class="btn btn-gold calc-open magnet" aria-expanded="false" aria-controls="calc-box" data-calc-open><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7h7M8.5 11h.01M12 11h.01M15.5 11h.01M8.5 14.5h.01M12 14.5h.01M15.5 14.5h.01M8.5 18h.01M12 18h3.5"/></svg>Fazer a conta <span class="arr" aria-hidden="true">→</span></button>
+    <p class="note">3 perguntas, menos de 1 minuto.</p>
+  </div>
+  <div class="glow calc rv" id="calc-box" data-tipo="prod">
     <div class="calc-pick">
       <p class="calc-lbl" id="calc-l1"><b>1</b> O que você procura?</p>
       <div class="seg" role="group" aria-labelledby="calc-l1">
@@ -278,6 +282,34 @@
   <noscript><p class="calc-nojs">Ative o JavaScript para ver a conta, ou peça os valores pelo formulário.</p></noscript>
 </section>
 
+<!-- Dobra 7 · Formulário -->
+<section class="sec sec-flow wrap" aria-labelledby="t-form" style="--h:770px;--hd:717px">
+  <div class="glow contact" id="contato">
+    <div><h2 class="rv grad" id="t-form">Conte o que você precisa</h2></div>
+    <div class="rv" id="lead-box">
+      <form class="form" id="lead" action="/api/lead" method="post" novalidate>
+        <label>Seu nome<input name="nome" autocomplete="name" required maxlength="120"></label>
+        <label>WhatsApp (com DDD)<input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" required placeholder="(11) 90000-0000" maxlength="20" aria-describedby="wa-help"><small id="wa-help">É por aqui que a gente responde.</small></label>
+        <label>Nome da empresa<input name="empresa" autocomplete="organization" required maxlength="160"></label>
+        <label>O que você precisa
+          <select name="necessidade" required>
+            <option value="" selected disabled>Escolha uma opção</option>
+            <option>Site</option><option>Fulcre Zap</option><option>Fulcre CRM</option><option>Automação ou agente de IA</option><option>Sistema</option><option>Dashboards e relatórios</option><option>Ainda não sei</option>
+          </select></label>
+        <div class="hp" aria-hidden="true"><label>Não preencha<input name="site" tabindex="-1" autocomplete="off"></label></div>
+        <label class="consent"><input type="checkbox" name="consentimento" required><span>Aceito que a Fulcre use estes dados só para responder este pedido. Ver <a href="/privacidade">Política de Privacidade</a>.</span></label>
+        <p class="err" id="lead-err" role="alert"></p>
+        <button class="btn btn-gold magnet" type="submit">Enviar e receber contato no WhatsApp</button>
+        <p class="note">Sem compromisso. Resposta em até 1 dia útil.</p>
+      </form>
+      <div class="done" role="status" aria-live="polite">
+        <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+        <p>Recebemos. A gente chama você no WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Dobra 10 · Regras da Fulcre (fiéis a /regras, que são contrato nos Termos) -->
 <section class="sec sec-flow wrap regras-sec" data-regras aria-labelledby="t-regras" style="--h:1024px;--hd:601px">
   <div class="sec-head"><h2 class="rv grad" id="t-regras">As Regras da Fulcre</h2><p class="rv">Valem para todos os produtos e estão nos Termos de Uso, então você pode cobrar.</p></div>
@@ -323,33 +355,6 @@
   </div>
 </section>
 
-<!-- Dobra 7 · Formulário -->
-<section class="sec wrap" aria-labelledby="t-form" style="padding-top:0;--h:770px;--hd:717px">
-  <div class="glow contact" id="contato">
-    <div><h2 class="rv grad" id="t-form">Conte o que você precisa</h2></div>
-    <div class="rv" id="lead-box">
-      <form class="form" id="lead" action="/api/lead" method="post" novalidate>
-        <label>Seu nome<input name="nome" autocomplete="name" required maxlength="120"></label>
-        <label>WhatsApp (com DDD)<input name="whatsapp" type="tel" inputmode="numeric" autocomplete="tel-national" required placeholder="(11) 90000-0000" maxlength="20" aria-describedby="wa-help"><small id="wa-help">É por aqui que a gente responde.</small></label>
-        <label>Nome da empresa<input name="empresa" autocomplete="organization" required maxlength="160"></label>
-        <label>O que você precisa
-          <select name="necessidade" required>
-            <option value="" selected disabled>Escolha uma opção</option>
-            <option>Site</option><option>Fulcre Zap</option><option>Fulcre CRM</option><option>Automação ou agente de IA</option><option>Sistema</option><option>Dashboards e relatórios</option><option>Ainda não sei</option>
-          </select></label>
-        <div class="hp" aria-hidden="true"><label>Não preencha<input name="site" tabindex="-1" autocomplete="off"></label></div>
-        <label class="consent"><input type="checkbox" name="consentimento" required><span>Aceito que a Fulcre use estes dados só para responder este pedido. Ver <a href="/privacidade">Política de Privacidade</a>.</span></label>
-        <p class="err" id="lead-err" role="alert"></p>
-        <button class="btn btn-gold magnet" type="submit">Enviar e receber contato no WhatsApp</button>
-        <p class="note">Sem compromisso. Resposta em até 1 dia útil.</p>
-      </form>
-      <div class="done" role="status" aria-live="polite">
-        <div class="tick" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
-        <p>Recebemos. A gente chama você no WhatsApp.</p>
-      </div>
-    </div>
-  </div>
-</section>
 </main>
 </div>
 
@@ -409,7 +414,7 @@
 </div></dialog>
 
 
-<script src="./assets/js/site.js?v=7"></script>
+<script src="./assets/js/site.js?v=8"></script>
 <script type="module" src="./assets/js/home.js?v=7"></script>
 </body>
 </html>
