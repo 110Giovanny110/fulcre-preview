@@ -175,17 +175,14 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .ledger>li{display:grid;grid-template-columns:auto minmax(0,1.25fr) minmax(0,1fr);gap:10px clamp(16px,2.4vw,32px);align-items:center;padding:clamp(18px,2vw,22px) clamp(18px,2.6vw,30px)}
 .ledger>li+li{box-shadow:0 -1px 0 var(--line)}
 .ledger .case{font-family:'Sora',sans-serif;font-weight:500;font-size:min(var(--fs-list),16.5px);letter-spacing:-.015em;line-height:1.4}
-.ledger .fix{display:flex;flex-direction:column;align-items:flex-start;gap:7px;color:var(--soft);font-size:15px;line-height:1.45}
 .ledger .ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:rgba(255,107,107,.07);box-shadow:0 0 0 1px rgba(255,107,107,.22) inset;position:relative}
 .ledger .ic svg{width:20px;height:20px;stroke:#ff8a80;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ledger .ic::after{content:'';position:absolute;right:-3px;top:-3px;width:8px;height:8px;border-radius:50%;background:#ff6b6b;box-shadow:0 0 12px #ff6b6b;animation:blink 1.6s infinite;animation-play-state:var(--play,paused)}
 .ledger>li:nth-child(2) .ic::after{animation-delay:.4s}.ledger>li:nth-child(3) .ic::after{animation-delay:.8s}.ledger>li:nth-child(4) .ic::after{animation-delay:1.2s}.ledger>li:nth-child(5) .ic::after{animation-delay:.2s}
 @keyframes blink{50%{opacity:.25}}
-/* 26/11: a 2a dobra comeca mais perto do topo (o triangulo agora sobe junto com o topo, nao precisa de folga) */
-.dor{padding-top:clamp(24px,3vw,48px)}
 .dor-fim{margin:clamp(28px,4vw,44px) auto 0;max-width:46ch;text-align:center;font-family:'Sora',sans-serif;font-weight:500;font-size:min(var(--fs-list),19px);letter-spacing:-.02em;line-height:1.4;text-wrap:balance}
 .dor-fim .goldt{display:block}
-@media(max-width:720px){.ledger>li{grid-template-columns:auto minmax(0,1fr);align-items:start}.ledger .fix{grid-column:2}}
+@media(max-width:720px){.ledger>li{grid-template-columns:auto minmax(0,1fr);align-items:start}}
 
 /* Dobra 3 · O que e a Fulcre + hub. Os pulsos saem do nucleo (logo) para cada frente; nos na cor do tipo.
    Posicoes: --x/--y no computador, --xm/--ym no celular (composicao vertical: 3 nos acima e 3 abaixo do nucleo).
@@ -591,11 +588,6 @@ th{color:var(--ink);font-family:'Sora';font-weight:600;font-size:15px}
 .calc-note{font-size:13px;line-height:1.5;color:#8793AE;max-width:60ch}
 /* 26/11: 3a pergunta (so produtos) e o bloco "por que vale" */
 .calc-lbl[hidden]{display:none}
-/* 26/11: o que muda na pratica = 3 itens curtos em verde com check (quebram o visual dos numeros) */
-.calc-valor{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:8px;max-width:800px}
-.calc-valor[hidden]{display:none}
-.calc-valor li{display:inline-flex;align-items:center;gap:8px;padding:8px 14px 8px 10px;border-radius:999px;font-size:14.5px;font-weight:600;line-height:1.3;color:#7EE2B0;background:rgba(52,211,153,.08);box-shadow:0 0 0 1px rgba(52,211,153,.3) inset}
-.calc-valor li::before{content:'';flex:none;width:16px;height:16px;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
 .calc-cta{max-width:100%}
 
 /* T6 · Modal do WhatsApp (dialog.wam). Vidro escuro, escala v4 (compacta). */
@@ -683,7 +675,6 @@ html:has(dialog.wam[open]){overflow:hidden}
   .sec-head{margin-bottom:40px}
   .sec-head h2+p,.sec-head p{margin-top:16px}
   .ledger>li{padding:24px 20px;gap:14px 16px}
-  .ledger .fix{gap:10px}
   .split,.split2{gap:56px}
   .prods,.safe{gap:24px}
   .prod-card{gap:22px;padding:18px}
@@ -706,30 +697,19 @@ html:has(dialog.wam[open]){overflow:hidden}
   .hero .lede{margin-top:clamp(22px,3.4svh,34px)}
   .hero .acts{margin-top:clamp(36px,5.5svh,54px)}
 }
-.calc-valor{display:none!important}
 .svc-list{display:grid;gap:12px}
 .svc-list>li,.svc-list>li:last-child{padding:20px 20px 16px;border:0;border-radius:18px;background:rgba(91,130,255,.045);box-shadow:0 0 0 1px rgba(91,130,255,.14) inset}
 .svc-list>li::before{display:none}
 @media(max-width:720px){
   .ledger{background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;border-radius:0;display:grid;gap:12px}
   .ledger>li,.ledger>li+li{border-radius:18px;background:rgba(14,20,36,.78);box-shadow:0 0 0 1px var(--line) inset;padding:20px 18px}
-  .ledger .fix{padding-top:12px;margin-top:2px;border-top:1px solid var(--line);font-size:14.5px}
   .steps>li{padding-bottom:44px}
-  .dia-box{--dur:10s}
-  .dia>li:nth-child(2) .hora::before{animation-delay:2s}.dia>li:nth-child(3) .hora::before{animation-delay:4s}.dia>li:nth-child(4) .hora::before{animation-delay:6s}.dia>li:nth-child(5) .hora::before{animation-delay:8s}
 }
-/* Teste 27/11 b: dor sem etiqueta colorida; icone verde no lado que resolve */
-.ledger .fix{flex-direction:row;align-items:flex-start;gap:12px}
-.ledger .fix .ok{flex:none;width:28px;height:28px;border-radius:9px;background:rgba(52,211,153,.08);box-shadow:0 0 0 1px rgba(52,211,153,.3) inset;position:relative}
-.ledger .fix .ok::after{content:'';position:absolute;inset:7px;background:#5EE0A0;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center/contain no-repeat}
-.ledger .fix-t{padding-top:3px}
-.ledger .fix-t b{color:#7EE2B0;font-weight:600}
 /* Teste 27/11 b: servicos com menos azul (pontos neutros, link dourado) */
 .pts li::before{background:rgba(238,242,250,.45)}
 .tlink-svc{color:var(--gold)}
 /* Teste 27/11 c */
 /* Dor: so o icone vermelho e o problema */
-.ledger .fix{display:none!important}
 .ledger>li{grid-template-columns:auto minmax(0,1fr)!important}
 /* Divisoria entre blocos (v3): fio que nasce transparente nas pontas, dourado no meio,
    com um ponto de luz no centro e um brilho que percorre o fio de tempos em tempos. Nao corta a pagina. */
@@ -745,24 +725,12 @@ main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
   .hero .lede{margin-top:clamp(28px,4.2svh,40px)}
   .hero .acts{margin-top:clamp(44px,6.5svh,64px);gap:16px}
 }
-/* Dia a dia mais rapido no celular */
-@media(max-width:720px){
-  .dia-box{--dur:7.5s}
-  .dia>li:nth-child(2) .hora::before{animation-delay:1.5s}.dia>li:nth-child(3) .hora::before{animation-delay:3s}.dia>li:nth-child(4) .hora::before{animation-delay:4.5s}.dia>li:nth-child(5) .hora::before{animation-delay:6s}
-}
 /* Duas formas: PRODUTOS / SERVICOS como titulo, frase de apoio menor */
 .oferta>.lbl{font-size:clamp(19px,.9vw + 14px,24px);letter-spacing:.12em;gap:12px}
 .oferta>.lbl::before{width:9px;height:9px}
 .oferta>h3{font-family:'Figtree',sans-serif;font-size:clamp(15.5px,.3vw + 14px,17.5px);font-weight:500;letter-spacing:0;color:var(--soft);margin-top:12px}
 .oferta>h3 span{display:inline}
 /* 27/11 parte 3 (pedido do dono) */
-/* Dia a dia: bolinha mais rapida */
-.dia-box{--dur:10s}
-.dia>li:nth-child(2) .hora::before{animation-delay:2s}.dia>li:nth-child(3) .hora::before{animation-delay:4s}.dia>li:nth-child(4) .hora::before{animation-delay:6s}.dia>li:nth-child(5) .hora::before{animation-delay:8s}
-@media(max-width:720px){
-  .dia-box{--dur:5s}
-  .dia>li:nth-child(2) .hora::before{animation-delay:1s}.dia>li:nth-child(3) .hora::before{animation-delay:2s}.dia>li:nth-child(4) .hora::before{animation-delay:3s}.dia>li:nth-child(5) .hora::before{animation-delay:4s}
-}
 /* Calculadora fechada: so titulo, frase e botao; abre ao clicar */
 .calc-gate{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:clamp(8px,1.5vw,16px)}
 .calc-gate .note{margin:0;color:var(--soft);font-size:14.5px}
@@ -773,7 +741,7 @@ main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 .calc-sec.is-open .calc-gate{display:none}
 .calc-sec.is-open .calc{animation:calcIn .6s cubic-bezier(.2,.7,.2,1) both}
 @keyframes calcIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
-/* 27/11 parte 4: bolinha ainda mais rapida */
+/* 27/11 partes 3 e 4: dia a dia mais rapido (7 s no computador, 3,5 s no celular) */
 .dia-box{--dur:7s}
 .dia>li:nth-child(2) .hora::before{animation-delay:1.4s}.dia>li:nth-child(3) .hora::before{animation-delay:2.8s}.dia>li:nth-child(4) .hora::before{animation-delay:4.2s}.dia>li:nth-child(5) .hora::before{animation-delay:5.6s}
 @media(max-width:720px){
@@ -783,10 +751,8 @@ main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 /* 27/11 parte 5 (pedido do dono) */
 /* Frase do topo: mesma largura, quebra natural e centralizada (sem equilibrar as linhas) */
 .hero .lede{text-wrap:wrap}
-/* Divisoria: sem linha onde a dobra ja tem as proprias linhas (Duas formas) e acima da faixa de ferramentas */
-main>section.sec+section.sec.ofertas::before,main>section.sec+section.sec.faixa::before{display:none}
-/* Divisoria parada (sem o brilho correndo) quando encosta em bloco animado: hub, faixa, cadeado, dia a dia */
-main>section.sec+section.sec.sobre::before,main>section.sec+section.sec.como::before,main>section.sec+section.sec.seguranca::before,main>section.sec+section.sec.resultados::before,main>section.sec+section.sec.calc-sec::before{animation:none;background:linear-gradient(90deg,transparent,rgba(217,180,122,.12) 22%,rgba(217,180,122,.45) 50%,rgba(217,180,122,.12) 78%,transparent)}
+/* Divisoria parada (sem o brilho correndo) quando encosta em bloco animado: cadeado, dia a dia, calculadora */
+main>section.sec+section.sec.como::before,main>section.sec+section.sec.seguranca::before,main>section.sec+section.sec.resultados::before,main>section.sec+section.sec.calc-sec::before{animation:none;background:linear-gradient(90deg,transparent,rgba(217,180,122,.12) 22%,rgba(217,180,122,.45) 50%,rgba(217,180,122,.12) 78%,transparent)}
 /* 27/11 parte 6 (pedido do dono): padrao unico = fio dourado que some nas pontas.
    Com brilho correndo onde o entorno e calmo; parado onde encosta em animacao. */
 main>section.sec+section.sec.sobre::before{animation:fioLuz 7s cubic-bezier(.45,0,.25,1) infinite;background:linear-gradient(90deg,transparent,rgba(255,240,210,.95),transparent) no-repeat -50% 0/28% 100%,linear-gradient(90deg,transparent,rgba(217,180,122,.14) 22%,rgba(217,180,122,.55) 50%,rgba(217,180,122,.14) 78%,transparent)}

@@ -1,8 +1,8 @@
 // Entrada em modulo da home v4 (so o index.html carrega). site.js segue como script classico
 // porque as paginas internas dependem dele. Os modulos novos da home sao ligados aqui.
 import { initMenu } from './menu.js?v=7';
-import { initBackground } from './bg.js?v=7';
-import { initCalc } from './calc.js?v=7';
+import { initBackground } from './bg.js?v=8';
+import { initCalc } from './calc.js?v=8';
 import { initWaModal } from './wa.js?v=7';
 
 // T3: fundo. Camada estatica sempre; 3D animado so no computador, carregado depois do conteudo (bg.js).

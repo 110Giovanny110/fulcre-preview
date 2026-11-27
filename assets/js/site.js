@@ -283,9 +283,9 @@
   btn.addEventListener('click', function () {
     sec.classList.add('is-open');
     btn.setAttribute('aria-expanded', 'true');
-    var first = sec.querySelector('.calc .seg button');
-    if (first) first.focus({ preventScroll: true });
     var box = sec.querySelector('.calc');
+    var first = sec.querySelector('.calc .seg button') || box;
+    if (first) first.focus({ preventScroll: true });
     if (box && box.scrollIntoView) box.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 })();

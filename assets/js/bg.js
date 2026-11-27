@@ -53,7 +53,6 @@ export function initBackground() {
 
   root.dataset.bg = 'static';
   if (!host || !hero) return null;
-  if (!shouldAnimate3D({ webgl: hasWebGL() })) return null;
 
   let ctl = null;
   let inView = true;
@@ -74,23 +73,14 @@ export function initBackground() {
     });
   };
 
+  // O teste de WebGL cria um contexto de verdade, o que trava a tela (ate ~1 s em celular fraco ou sem GPU).
+  // Por isso ele roda so depois do conteudo, junto com o resto do 3D, e nao na carga do modulo.
   return afterContent()
-    .then(() => loadScript('assets/js/three.min.js'))
-    .then(() => import('./crystal-home.js?v=7'))
-    .then(({ startCrystal }) => {
-      root.dataset.bg = 'live'; // mostra o canvas antes de medir o tamanho dele
-      // Contexto WebGL descartado (celular voltando de outro app, pouca memoria): volta para a imagem parada ate ele voltar.
-      ctl = startCrystal(host, {
-        onLost: () => { root.dataset.bg = 'static'; },
-        onRestored: () => { root.dataset.bg = 'live'; ctl.fit(true); sync(); },
-      });
-      onScroll();
-      addEventListener('scroll', onScroll, { passive: true });
-      new IntersectionObserver((es) => { inView = es[es.length - 1].isIntersecting; sync(); }).observe(hero);
-      let rt = 0;
-      addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { ctl.fit(); onScroll(); }, 120); });
-      document.addEventListener('visibilitychange', sync);
-      return ctl;
+    .then(() => {
+      if (!shouldAnimate3D({ webgl: hasWebGL() })) return null;
+      return loadScript('assets/js/three.min.js')
+        .then(() => import('./crystal-home.js?v=7'))
+        .then(start);
     })
     .catch((e) => {
       // Sem 3D o site continua inteiro (fica a camada estatica). Registra para nao virar falha silenciosa.
@@ -99,4 +89,20 @@ export function initBackground() {
       host.replaceChildren(); // nao deixa canvas orfao se o 3D falhar no meio
       return null;
     });
+
+  function start({ startCrystal }) {
+    root.dataset.bg = 'live'; // mostra o canvas antes de medir o tamanho dele
+    // Contexto WebGL descartado (celular voltando de outro app, pouca memoria): volta para a imagem parada ate ele voltar.
+    ctl = startCrystal(host, {
+      onLost: () => { root.dataset.bg = 'static'; },
+      onRestored: () => { root.dataset.bg = 'live'; ctl.fit(true); sync(); },
+    });
+    onScroll();
+    addEventListener('scroll', onScroll, { passive: true });
+    new IntersectionObserver((es) => { inView = es[es.length - 1].isIntersecting; sync(); }).observe(hero);
+    let rt = 0;
+    addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { ctl.fit(); onScroll(); }, 120); });
+    document.addEventListener('visibilitychange', sync);
+    return ctl;
+  }
 }

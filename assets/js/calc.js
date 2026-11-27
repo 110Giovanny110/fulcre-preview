@@ -88,18 +88,13 @@ const BEN_SERVICO = [
 const META = {
   crm: { tipo: 'prod', assunto: 'Fulcre CRM', cta: 'Quero esse preço', slider: { min: 50, max: 1500, step: 1 },
     ben: ['Preço travado enquanto a assinatura estiver ativa', 'Cancela quando quiser, sem multa', 'Você exporta seus dados quando quiser', 'Garantia de 30 dias depois da compra'],
-    neutro: 'Seu valor de hoje já é menor que o da Fulcre. O que muda é o resto: preço travado, cancela sem multa e gente no suporte.',
-    valor: ['Nenhum contato esquecido', 'Próximo passo de cada cliente marcado', 'Todas as vendas numa tela'] },
+    neutro: 'Seu valor de hoje já é menor que o da Fulcre. O que muda é o resto: preço travado, cancela sem multa e gente no suporte.' },
   zap: { tipo: 'prod', assunto: 'Fulcre Zap', cta: 'Entrar na lista de fundadores', slider: { min: 20, max: 600, step: 1 },
     ben: ['Pagamento único, sem mensalidade', 'Seus dados ficam no seu computador', 'Garantia de 30 dias depois da compra', 'Suporte incluso nos primeiros 12 meses'],
-    neutro: 'Nesse valor, o preço fica parecido. O ganho é outro: você paga uma vez e seus dados ficam no seu computador.',
-    valor: ['Confirmação no WhatsApp, sozinha', 'Lembrete antes do horário', 'Menos horário vazio na agenda'] },
-  site: { tipo: 'svc', assunto: 'Site', cta: 'Quero esse preço', ben: BEN_SERVICO,
-    valor: ['Aparece quando pesquisam sua empresa', 'Explica o que você faz', 'Leva direto ao seu WhatsApp'] },
-  ia: { tipo: 'svc', assunto: 'Automação ou agente de IA', cta: 'Quero esse preço', ben: BEN_SERVICO,
-    valor: ['Resposta na hora, 24h', 'Tira dúvidas e marca horário', 'Passa para você quando precisa'] },
-  sistema: { tipo: 'svc', assunto: 'Sistema', cta: 'Quero esse preço', ben: BEN_SERVICO,
-    valor: ['Fim do trabalho repetido', 'Do jeito que sua empresa trabalha', 'Tudo num lugar só'] },
+    neutro: 'Nesse valor, o preço fica parecido. O ganho é outro: você paga uma vez e seus dados ficam no seu computador.' },
+  site: { tipo: 'svc', assunto: 'Site', cta: 'Quero esse preço', ben: BEN_SERVICO },
+  ia: { tipo: 'svc', assunto: 'Automação ou agente de IA', cta: 'Quero esse preço', ben: BEN_SERVICO },
+  sistema: { tipo: 'svc', assunto: 'Sistema', cta: 'Quero esse preço', ben: BEN_SERVICO },
 };
 
 export function initCalc(root) {
@@ -215,10 +210,6 @@ export function initCalc(root) {
     const neutroTxt = usaHoje ? meta.neutro || '' : 'O preço fica parecido com a média de mercado. O ganho está nas Regras da Fulcre: preço travado, sem multa e gente no suporte.';
     f('eco-sub').textContent = neutro ? neutroTxt : `${q.economiaPct}% a menos que ${usaHoje ? 'o que você paga hoje' : 'a média de mercado'}`;
 
-    // O que muda na pratica: 3 itens curtos com check verde, para quem ainda nao paga por uma ferramenta assim (e nos servicos).
-    const valor = $('[data-valor]');
-    valor.hidden = usaHoje || !meta.valor;
-    if (!valor.hidden) f('valor-l').replaceChildren(...meta.valor.map((txt) => { const li = document.createElement('li'); li.textContent = txt; return li; }));
 
     f('ben').replaceChildren(...meta.ben.map((txt) => { const li = document.createElement('li'); li.textContent = txt; return li; }));
 
