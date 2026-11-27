@@ -734,12 +734,10 @@ html:has(dialog.wam[open]){overflow:hidden}
 /* Divisoria entre blocos (v3): fio que nasce transparente nas pontas, dourado no meio,
    com um ponto de luz no centro e um brilho que percorre o fio de tempos em tempos. Nao corta a pagina. */
 main>section.sec{position:relative;content-visibility:visible!important}
-main>section.sec+section.sec::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(980px,88%);height:1px;pointer-events:none;
+main>header.hero+section.sec::before,main>section.sec+section.sec::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(980px,88%);height:1px;pointer-events:none;
   background:linear-gradient(90deg,transparent,rgba(255,240,210,.95),transparent) no-repeat -50% 0/28% 100%,linear-gradient(90deg,transparent,rgba(217,180,122,.14) 22%,rgba(217,180,122,.55) 50%,rgba(217,180,122,.14) 78%,transparent);
   animation:fioLuz 7s cubic-bezier(.45,0,.25,1) infinite}
-main>section.sec+section.sec::after{content:'';position:absolute;top:-3px;left:50%;width:7px;height:7px;margin-left:-3.5px;transform:rotate(45deg);pointer-events:none;background:#F2D7A6;box-shadow:0 0 0 3px rgba(217,180,122,.12),0 0 14px 3px rgba(217,180,122,.45);animation:fioNo 7s ease-in-out infinite}
 @keyframes fioLuz{0%,18%{background-position:-50% 0,0 0}72%,100%{background-position:150% 0,0 0}}
-@keyframes fioNo{0%,100%{opacity:.75;box-shadow:0 0 0 3px rgba(217,180,122,.1),0 0 10px 2px rgba(217,180,122,.35)}45%{opacity:1;box-shadow:0 0 0 4px rgba(217,180,122,.16),0 0 20px 5px rgba(217,180,122,.6)}}
 main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 /* Computador: topo com mais espaco */
 @media(min-width:761px){
@@ -775,3 +773,10 @@ main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 .calc-sec.is-open .calc-gate{display:none}
 .calc-sec.is-open .calc{animation:calcIn .6s cubic-bezier(.2,.7,.2,1) both}
 @keyframes calcIn{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+/* 27/11 parte 4: bolinha ainda mais rapida */
+.dia-box{--dur:7s}
+.dia>li:nth-child(2) .hora::before{animation-delay:1.4s}.dia>li:nth-child(3) .hora::before{animation-delay:2.8s}.dia>li:nth-child(4) .hora::before{animation-delay:4.2s}.dia>li:nth-child(5) .hora::before{animation-delay:5.6s}
+@media(max-width:720px){
+  .dia-box{--dur:3.5s}
+  .dia>li:nth-child(2) .hora::before{animation-delay:.7s}.dia>li:nth-child(3) .hora::before{animation-delay:1.4s}.dia>li:nth-child(4) .hora::before{animation-delay:2.1s}.dia>li:nth-child(5) .hora::before{animation-delay:2.8s}
+}
