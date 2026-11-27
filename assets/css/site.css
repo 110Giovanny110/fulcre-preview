@@ -735,7 +735,7 @@ html:has(dialog.wam[open]){overflow:hidden}
    Uma dobra sim, outra nao, ganha fundo solido; o fundo animado so aparece nas dobras sem faixa. */
 main>section.sec{position:relative;content-visibility:visible!important}
 main>section.sec:nth-of-type(odd){isolation:isolate}
-main>section.sec:nth-of-type(odd)::after{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:linear-gradient(180deg,#0C1426,#091020);border-top:1px solid rgba(217,180,122,.28);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 -30px 60px -40px rgba(217,180,122,.25)}
+main>section.sec:nth-of-type(odd)::after{content:'';position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);background:none;border-top:1px solid rgba(217,180,122,.28);border-bottom:1px solid rgba(255,255,255,.07);box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 -30px 60px -40px rgba(217,180,122,.25)}
 main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
 /* Computador: topo com mais espaco */
 @media(min-width:761px){
