@@ -780,3 +780,10 @@ main>section.sec.dor,main>section.sec.sec-flow{padding-top:var(--sp-section)}
   .dia-box{--dur:3.5s}
   .dia>li:nth-child(2) .hora::before{animation-delay:.7s}.dia>li:nth-child(3) .hora::before{animation-delay:1.4s}.dia>li:nth-child(4) .hora::before{animation-delay:2.1s}.dia>li:nth-child(5) .hora::before{animation-delay:2.8s}
 }
+/* 27/11 parte 5 (pedido do dono) */
+/* Frase do topo: mesma largura, quebra natural e centralizada (sem equilibrar as linhas) */
+.hero .lede{text-wrap:wrap}
+/* Divisoria: sem linha onde a dobra ja tem as proprias linhas (Duas formas) e acima da faixa de ferramentas */
+main>section.sec+section.sec.ofertas::before,main>section.sec+section.sec.faixa::before{display:none}
+/* Divisoria parada (sem o brilho correndo) quando encosta em bloco animado: hub, faixa, cadeado, dia a dia */
+main>section.sec+section.sec.sobre::before,main>section.sec+section.sec.como::before,main>section.sec+section.sec.seguranca::before,main>section.sec+section.sec.resultados::before,main>section.sec+section.sec.calc-sec::before{animation:none;background:linear-gradient(90deg,transparent,rgba(217,180,122,.12) 22%,rgba(217,180,122,.45) 50%,rgba(217,180,122,.12) 78%,transparent)}
