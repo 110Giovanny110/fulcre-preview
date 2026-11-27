@@ -791,3 +791,5 @@ main>section.sec+section.sec.sobre::before,main>section.sec+section.sec.como::be
    Com brilho correndo onde o entorno e calmo; parado onde encosta em animacao. */
 main>section.sec+section.sec.sobre::before{animation:fioLuz 7s cubic-bezier(.45,0,.25,1) infinite;background:linear-gradient(90deg,transparent,rgba(255,240,210,.95),transparent) no-repeat -50% 0/28% 100%,linear-gradient(90deg,transparent,rgba(217,180,122,.14) 22%,rgba(217,180,122,.55) 50%,rgba(217,180,122,.14) 78%,transparent)}
 main>section.sec+section.sec.ofertas::before,main>section.sec+section.sec.faixa::before{display:block;animation:none;background:linear-gradient(90deg,transparent,rgba(217,180,122,.12) 22%,rgba(217,180,122,.45) 50%,rgba(217,180,122,.12) 78%,transparent)}
+/* 27/11 parte 7: fio depois do hub (Duas formas) mais transparente, para nao competir */
+main>section.sec+section.sec.ofertas::before{background:linear-gradient(90deg,transparent,rgba(217,180,122,.05) 22%,rgba(217,180,122,.2) 50%,rgba(217,180,122,.05) 78%,transparent)}
