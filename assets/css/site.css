@@ -727,3 +727,22 @@ html:has(dialog.wam[open]){overflow:hidden}
 /* Teste 27/11 b: servicos com menos azul (pontos neutros, link dourado) */
 .pts li::before{background:rgba(238,242,250,.45)}
 .tlink-svc{color:var(--gold)}
+/* Teste 27/11 c */
+/* Dor: so o icone vermelho e o problema */
+.ledger .fix{display:none!important}
+.ledger>li{grid-template-columns:auto minmax(0,1fr)!important}
+/* Divisoria entre blocos: linha dourada fina no topo de cada dobra e fundo alternado mais calmo */
+main>section.sec{position:relative}
+main>section.sec+section.sec::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:min(1000px,86%);height:1px;background:linear-gradient(90deg,transparent,rgba(217,180,122,.55),transparent);pointer-events:none}
+main>section.sec:nth-of-type(even){background:linear-gradient(180deg,rgba(6,10,20,.72),rgba(6,10,20,.72))}
+/* Computador: topo com mais espaco */
+@media(min-width:761px){
+  .hero .kick{margin-bottom:clamp(40px,6svh,64px);transform:translateY(-18px)}
+  .hero .lede{margin-top:clamp(28px,4.2svh,40px)}
+  .hero .acts{margin-top:clamp(44px,6.5svh,64px);gap:16px}
+}
+/* Dia a dia mais rapido no celular */
+@media(max-width:720px){
+  .dia-box{--dur:7.5s}
+  .dia>li:nth-child(2) .hora::before{animation-delay:1.5s}.dia>li:nth-child(3) .hora::before{animation-delay:3s}.dia>li:nth-child(4) .hora::before{animation-delay:4.5s}.dia>li:nth-child(5) .hora::before{animation-delay:6s}
+}
