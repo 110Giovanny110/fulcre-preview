@@ -1,0 +1,13 @@
+{
+  "data": "nov/2026",
+  "site": { "mercado": 7075, "fulcre": 4490 },
+  "site-landing": { "mercado": 2920, "fulcre": 1890 },
+  "ia": {
+    "implantacao": { "mercado": 9958, "fulcre": 6490 },
+    "mensalidade": { "mercado": 1085, "fulcre": 690 },
+    "meses": 12
+  },
+  "sistema": { "mercado": 27500, "fulcre": 17900 },
+  "crm": { "mercado": 374, "fulcre": 149, "meses": 12 },
+  "zap": { "licenca": 497, "lista": 397, "renovacao": 197, "mercadoMensal": 158.5, "meses": 12, "vagasLista": 20 }
+}
